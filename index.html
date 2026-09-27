@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Types of Electric Guitars</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        /* Selection boxes */
+        .guitar-boxes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .guitar-box {
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .guitar-box:hover {
+            background-color: #e8e8e8;
+            transform: scale(1.02);
+        }
+
+        .guitar-box.selected {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        .guitar-box h3 {
+            margin: 5px;
+        }
+
+        .guitar-box p {
+            color: #666;
+        }
+
+        .guitar-box.selected p {
+            color: white;
+        }
+
+        /* Information box */
+        .info {
+            background-color: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ccc;
+        }
+
+        /* Quiz */
+        .quiz {
+            background-color: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 12px;
+        }
+
+        button {
+            padding: 12px 18px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: red;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .guitar-boxes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>🎸 Types of Electric Guitars</h1>
+        <p>Select a guitar to learn more about it!</p>
+    </header>
+
+
+    <!-- GUITAR SELECTION -->
+
+    <div class="guitar-boxes">
+
+        <div class="guitar-box" onclick="showGuitar(0)">
+            <h3>🎸 Solid Body</h3>
+            <p>Rock • Pop • Metal</p>
+        </div>
+
+        <div class="guitar-box" onclick="showGuitar(1)">
+            <h3>🎸 Semi-Hollow</h3>
+            <p>Blues • Jazz • Rock</p>
+        </div>
+
+        <div class="guitar-box" onclick="showGuitar(2)">
+            <h3>🎸 Hollow Body</h3>
+            <p>Jazz • Blues</p>
+        </div>
+
+        <div class="guitar-box" onclick="showGuitar(3)">
+            <h3>🎸 Seven-String</h3>
+            <p>Metal • Heavy Music</p>
+        </div>
+
+        <div class="guitar-box" onclick="showGuitar(4)">
+            <h3>🎸 Baritone</h3>
+            <p>Rock • Metal</p>
+        </div>
+
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <div class="info">
+
+        <h2 id="guitarTitle">
+            Select a guitar
+        </h2>
+
+        <p id="guitarInfo">
+            Click one of the boxes above to learn about
+            different types of electric guitars.
+        </p>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <div class="quiz">
+
+        <h2>🎯 Quick Quiz</h2>
+
+        <p>
+            Which guitar has an extra string?
+        </p>
+
+        <button onclick="checkAnswer('solid')">
+            Solid Body
+        </button>
+
+        <button onclick="checkAnswer('seven')">
+            Seven-String
+        </button>
+
+        <button onclick="checkAnswer('hollow')">
+            Hollow Body
+        </button>
+
+        <p id="quizResult"></p>
+
+    </div>
+
+
+    <!-- FACT -->
+
+    <div class="quiz">
+
+        <h2>💡 Did You Know?</h2>
+
+        <p id="fact">
+            Click the button to learn a guitar fact!
+        </p>
+
+        <button onclick="newFact()">
+            Show Another Fact
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* Guitar information */
+
+    const guitars = [
+
+        {
+            name: "Solid Body Guitar",
+            info:
+            "A solid body guitar is made from a solid piece of wood. It is one of the most common electric guitars and is often used for rock, pop, blues and metal."
+        },
+
+        {
+            name: "Semi-Hollow Body Guitar",
+            info:
+            "A semi-hollow guitar has an empty space inside part of the body. It usually has a warm sound and is often used for blues, jazz and rock."
+        },
+
+        {
+            name: "Hollow Body Guitar",
+            info:
+            "A hollow body guitar is mostly empty inside. It produces a warm and natural sound and is commonly used for jazz and blues."
+        },
+
+        {
+            name: "Seven-String Guitar",
+            info:
+            "A seven-string guitar has one extra string compared with a normal six-string guitar. The extra string allows the player to play lower notes and is often used in metal."
+        },
+
+        {
+            name: "Baritone Guitar",
+            info:
+            "A baritone guitar has a longer neck and can play lower notes than a normal electric guitar. It can be used in rock, metal and other styles."
+        }
+
+    ];
+
+
+    /* Show guitar information */
+
+    function showGuitar(number) {
+
+        document.getElementById("guitarTitle").textContent =
+            guitars[number].name;
+
+        document.getElementById("guitarInfo").textContent =
+            guitars[number].info;
+
+
+        /* Remove selected class */
+
+        const boxes =
+            document.querySelectorAll(".guitar-box");
+
+        boxes.forEach(function(box) {
+            box.classList.remove("selected");
+        });
+
+
+        /* Select clicked box */
+
+        boxes[number].classList.add("selected");
+
+    }
+
+
+    /* Quiz */
+
+    function checkAnswer(answer) {
+
+        const result =
+            document.getElementById("quizResult");
+
+        if (answer === "seven") {
+
+            result.textContent =
+                "✓ Correct! A seven-string guitar has an extra string.";
+
+            result.className = "correct";
+
+        } else {
+
+            result.textContent =
+                "✗ Not quite. Try again!";
+
+            result.className = "wrong";
+
+        }
+
+    }
+
+
+    /* Facts */
+
+    const facts = [
+
+        "Electric guitars usually use pickups to turn string vibrations into electrical signals.",
+
+        "Some electric guitars have seven or even more strings.",
+
+        "Baritone guitars can play lower notes than normal guitars.",
+
+        "Different pickups can give an electric guitar different sounds.",
+
+        "Electric guitars are commonly used in rock, pop, blues and metal."
+
+    ];
+
+
+    let factNumber = 0;
+
+
+    function newFact() {
+
+        factNumber++;
+
+        if (factNumber >= facts.length) {
+            factNumber = 0;
+        }
+
+        document.getElementById("fact").textContent =
+            facts[factNumber];
+
+    }
+
+</script>
+
+</body>
+</html>
+```
